@@ -1,0 +1,10 @@
+<label>Selected Patch: {{currentPatch}}</label><br>
+<button mat-button [mat-dialog-close]="returnData" cdkFocusInitial>Connect</button><br>
+  <ul>
+    Select a Patch for Connection/Pairing:
+    <li *ngFor = "let patch of data">
+      {{ patch.patchName }}
+      <button mat-button (click) = "setReturn(patch)" cdkFocusInitial>Select</button><br>
+    </li>
+  </ul>
+

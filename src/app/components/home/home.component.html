@@ -1,0 +1,97 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
+    <title> BLE Router Program </title>
+  </head>
+  <body>
+    <div>
+      <div style="text-align:center">
+        <h1>
+          {{ title }}
+        </h1>
+      </div>
+
+      <div>
+        Router IP:
+          <input [(ngModel)] = "RouterIP" placeholder ="Router IP Address"/> 
+          <p>
+          <strong>Patches Connected:</strong> <br> 
+            <ul>
+              <p>
+                <li *ngFor = "let patch of connectedArray">
+                    {{patch.patchName}}<br>
+                </li>
+            </p>
+            </ul>
+      </div>
+
+      <div>
+        Handle To Check:
+          <input [(ngModel)] = "handle" placeholder ="Handle To Check"/> 
+      </div>
+
+      <div class = "col-md-1">
+          <button (click)="scan(RouterIP)" type="button" class="i18n conbtn btn btn-success">Scan</button>
+      </div>
+
+      <div class = "col-md-1">
+          <button (click)="connectDialog()" type="button" class="i18n conbtn btn btn-success">Connect</button>
+      </div>
+
+      <div class = "col-md-1">
+        <button (click)="getServices(RouterIP)" type="button" class="i18n conbtn btn btn-success">Services</button>
+      </div>
+
+      <div class = "col-md-1">
+        <button (click)="getCharacteristics(RouterIP)" type="button" class="i18n conbtn btn btn-success">Streaming Characteristics</button>
+      </div>
+
+      <div class = "col-md-1">
+        <button (click)="checkHandle()" type="button" class="i18n conbtn btn btn-success">Check Handle Value</button>
+      </div>
+
+      <div class = "col-md-1">
+        <button (click)="pairDialog()" type="button" class="i18n conbtn btn btn-success">Pair</button>
+      </div>
+
+      <div class = "col-md-1">
+        <button (click)="startStreaming(RouterIP)" type="button" class="i18n conbtn btn btn-success">Start Streaming</button>
+      </div>
+
+      <div class = "col-md-1">
+          <button (click)="stopStreaming(RouterIP)" type="button" class="i18n conbtn btn btn-success">Stop Streaming</button>
+      </div>
+
+      <div class = "col-md-1">
+        <button (click)="unpair(RouterIP)" type="button" class="i18n conbtn btn btn-success">Unpair All</button>
+      </div>
+
+      <div class = "col-md-1">
+          <button (click)="disconnect(RouterIP)" type="button" class="i18n conbtn btn btn-success">Disconnect All</button>
+      </div>
+      <div class = "col-md-1">
+        <button (click)="export()" type="button" class="i18n conbtn btn btn-success">Export</button>
+    </div>
+      <div>
+        Devices Found: {{ connectNum }} <br> Devices Connected: {{connectedArray.length}} <br>Current Stage: {{CurrentStage}}
+      </div>
+    </div>
+    Paired Patches:<br>
+    <ul>
+      <li *ngFor = "let patch of pairedArray">
+          Name: {{ patch.patchName }}<br>
+          MAC: {{ patch.patchAddr }}<br>
+          Handle To Write To: <input #handleVal placeholder =""/><br><br>
+          Value To Write: <input #dataVal placeholder =""/><br><br>
+          Response?: <input #responseVal placeholder ="0 Yes, 1 No"/><br><br>
+          <button (click) = "writeVal(patch, handleVal.value, dataVal.value, responseVal.value)" type = "button">Write To Handle</button><br>
+          <button (click)="disconnectOne(patch)" type="button" class="i18n conbtn btn btn-success">Disconnect</button>
+      </li><br>
+    </ul>
+  </body>
+</html>
+
